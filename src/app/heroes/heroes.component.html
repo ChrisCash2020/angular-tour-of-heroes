@@ -1,0 +1,41 @@
+<h2>My Heroes</h2>
+<div>
+  <label for="new-hero">Hero name: </label>
+  <input id="new-hero" #heroName />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button
+    type="button"
+    class="add-button"
+    (click)="add(heroName.value); heroName.value = ''"
+  >
+    Add hero
+  </button>
+</div>
+<ul class="heroes">
+  <li *ngFor="let hero of heroes">
+    <a routerLink="/detail/{{ hero.id }}">
+      <span class="badge">{{ hero.id }}</span> {{ hero.name }}
+    </a>
+    <button
+      type="button"
+      class="delete"
+      title="delete hero"
+      (click)="delete(hero)"
+    >
+      x
+    </button>
+    <!-- the clas.** is a way to assign a class based on component props -->
+    <!-- <button
+      type="button"
+      [class.selected]="hero === selectedHero"
+      (click)="onSelect(hero)"
+    >
+      <span class="badge">{{ hero.id }}</span>
+      <span class="name">{{ hero.name }}</span>
+    </button>-->
+  </li>
+</ul>
+<!-- In order to pass along props to other components I need to bind it to them by adding them as such  -->
+<!-- The renaming was needed becaused selectedHero is already a variable declared in this scope but Hero is not and hero is still the proper name -->
+<!-- <app-hero-detail [hero]="selectedHero"></app-hero-detail> -->
